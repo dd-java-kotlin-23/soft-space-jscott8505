@@ -15,7 +15,7 @@ order: 0
 
 ## Summary
 
-[//]: # Parents and caregivers with Autistic children often have to navigate complex daily routines,
+### Parents and caregivers with Autistic children often have to navigate complex daily routines,
 such as unique support challenges, trying to find places that aren't going to overstimulate the
 child, specific routines, etc. This app can help the parents or caregivers a chance to vent, or ask
 for advice and connect to people who can understand and help with either giving suggestions,
@@ -25,7 +25,7 @@ and not be judge by people who don't understand what people go through with spec
 
 ## Intended users and user stories
 
-[//]: Parents/caregivers
+#### Parents/caregivers
 Siblings of special needs
 Support groups
 Special needs adults
