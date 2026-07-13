@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.softspace.profile;
+package edu.cnm.deepdive.softspace.model.entity;
 
 public class UserProfile {
 

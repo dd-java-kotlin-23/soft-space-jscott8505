@@ -1,9 +1,9 @@
-package edu.cnm.deepdive.softspace;
+package edu.cnm.deepdive.softspace.viewmodel;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import dagger.hilt.android.lifecycle.HiltViewModel;
-import edu.cnm.deepdive.softspace.profile.UserProfile;
+import edu.cnm.deepdive.softspace.model.entity.UserProfile;
 import jakarta.inject.Inject;
 
 @HiltViewModel

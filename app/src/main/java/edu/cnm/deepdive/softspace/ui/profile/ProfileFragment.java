@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.softspace.profile;
+package edu.cnm.deepdive.softspace.ui.profile;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputEditText;
 import dagger.hilt.android.AndroidEntryPoint;
-import edu.cnm.deepdive.softspace.UserProfileViewModel;
+import edu.cnm.deepdive.softspace.viewmodel.UserProfileViewModel;
 
 @AndroidEntryPoint
 public class ProfileFragment extends Fragment {
