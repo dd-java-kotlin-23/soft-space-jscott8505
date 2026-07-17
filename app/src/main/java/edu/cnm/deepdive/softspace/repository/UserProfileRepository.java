@@ -6,10 +6,10 @@ import androidx.lifecycle.MutableLiveData;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
+import edu.cnm.deepdive.softspace.model.AuthenticatedUser;
 import edu.cnm.deepdive.softspace.model.entity.UserProfile;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
@@ -35,26 +35,23 @@ public class UserProfileRepository {
     return error;
   }
 
-  public void loadOrCreate(FirebaseUser firebaseUser) {
+  public void loadOrCreate(AuthenticatedUser user) {
     if (firestore == null) {
       error.setValue(configurationException());
       return;
     }
-    document(firebaseUser.getUid()).get().addOnSuccessListener(snapshot -> {
+    document(user.getId()).get().addOnSuccessListener(snapshot -> {
       if (snapshot.exists()) {
         profile.setValue(snapshot.toObject(UserProfile.class));
       } else {
-        createFor(firebaseUser);
+        createFor(user);
       }
     }).addOnFailureListener(error::setValue);
   }
 
-  public Task<Void> createFor(FirebaseUser firebaseUser) {
+  public Task<Void> createFor(AuthenticatedUser user) {
     UserProfile initial = new UserProfile(
-        firebaseUser.getUid(),
-        firebaseUser.getDisplayName(),
-        firebaseUser.getEmail(),
-        firebaseUser.getPhotoUrl() != null ? firebaseUser.getPhotoUrl().toString() : null);
+        user.getId(), user.getDisplayName(), user.getEmail(), user.getAvatarUrl());
     return save(initial);
   }
 

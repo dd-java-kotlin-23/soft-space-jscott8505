@@ -3,8 +3,8 @@ package edu.cnm.deepdive.softspace.viewmodel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import com.google.firebase.auth.FirebaseUser;
 import dagger.hilt.android.lifecycle.HiltViewModel;
+import edu.cnm.deepdive.softspace.model.AuthenticatedUser;
 import edu.cnm.deepdive.softspace.model.entity.UserProfile;
 import edu.cnm.deepdive.softspace.repository.UserProfileRepository;
 import jakarta.inject.Inject;
@@ -37,7 +37,7 @@ public class UserProfileViewModel extends ViewModel {
     return message;
   }
 
-  public void load(FirebaseUser user) {
+  public void load(AuthenticatedUser user) {
     repository.loadOrCreate(user);
   }
 

@@ -4,9 +4,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseUser;
 import dagger.hilt.android.lifecycle.HiltViewModel;
+import edu.cnm.deepdive.softspace.model.AuthenticatedUser;
 import edu.cnm.deepdive.softspace.repository.UserProfileRepository;
 import edu.cnm.deepdive.softspace.service.AuthService;
 import jakarta.inject.Inject;
@@ -28,7 +27,7 @@ public class AuthViewModel extends ViewModel {
     }
   }
 
-  public LiveData<FirebaseUser> getUser() {
+  public LiveData<AuthenticatedUser> getUser() {
     return authService.getUser();
   }
 
@@ -47,8 +46,8 @@ public class AuthViewModel extends ViewModel {
   public void register(String email, String password) {
     busy.setValue(true);
     message.setValue(null);
-    authService.register(email, password).addOnSuccessListener(result ->
-        profileRepository.createFor(result.getUser()).addOnCompleteListener(profileTask -> {
+    authService.register(email, password).addOnSuccessListener(user ->
+        profileRepository.createFor(user).addOnCompleteListener(profileTask -> {
           busy.setValue(false);
           if (!profileTask.isSuccessful()) {
             postError(profileTask.getException());
@@ -80,7 +79,7 @@ public class AuthViewModel extends ViewModel {
     authService.signOut();
   }
 
-  private void run(Task<AuthResult> task, String successMessage) {
+  private void run(Task<AuthenticatedUser> task, String successMessage) {
     busy.setValue(true);
     message.setValue(null);
     task.addOnCompleteListener(result -> {
