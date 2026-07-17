@@ -24,6 +24,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.schema.parser)
     alias(libs.plugins.junit)
+    id("com.google.gms.google-services").version("4.5.0")
 }
 
 // Firebase Console generates google-services.json for this application's package name. Keeping the
