@@ -39,7 +39,7 @@ do for their children.
 
 ## Functionality
 
-[//]: # User authentication and profiles
+#### User authentication and profiles
 Event calendar and local directory
 Direct messages
 Filter and search
@@ -50,7 +50,7 @@ Filter and search
 
 ## Device/external services
 
-[//]: # Push Notifications
+#### # Push Notifications
 -send reminders for events saved, messages
 
 Storage/ Local file access
@@ -64,6 +64,6 @@ Location/Maps
 
 ## Stretch goals and possible enhancements
 
-[//]: # Push notifications of event reminders, perhaps as a stretch goal
+## Push notifications of event reminders, perhaps as a stretch goal
 Maps for events, perhaps as a stretch goal
 

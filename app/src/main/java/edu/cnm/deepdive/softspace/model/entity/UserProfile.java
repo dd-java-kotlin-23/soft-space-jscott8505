@@ -17,7 +17,6 @@ public class UserProfile {
     this.email = email;
     this.avatarUrl = avatarUrl;
     this.bio = bio;
-
   }
 
   public String getId() {
