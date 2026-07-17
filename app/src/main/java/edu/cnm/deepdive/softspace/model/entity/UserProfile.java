@@ -3,11 +3,13 @@ package edu.cnm.deepdive.softspace.model.entity;
 public class UserProfile {
 
   private String id;
-  public String displayName;
-  public String email;
-  public String avatarUrl;
-  public String bio;
+  private String displayName;
+  private String email;
+  private String avatarUrl;
+  private String bio;
 
+  // Firestore needs a public no-argument constructor. In Kotlin, give every property in a data
+  // class a default value instead (for example, val id: String = "").
   public UserProfile() {
   }
 
@@ -16,7 +18,7 @@ public class UserProfile {
     this.displayName = displayName;
     this.email = email;
     this.avatarUrl = avatarUrl;
-    this.bio = bio;
+    this.bio = "";
   }
 
   public String getId() {
@@ -53,13 +55,11 @@ public class UserProfile {
   public void setBio(String bio) {
     this.bio = bio;
   }
-
-
-public void updateUserProfile(UserProfile userProfile) {
-  this.displayName = userProfile.displayName;
-  this.email = userProfile.email;
-  this.avatarUrl = userProfile.avatarUrl;
-  this.bio = userProfile.bio;
-}
+  public void updateUserProfile(UserProfile userProfile) {
+    this.displayName = userProfile.displayName;
+    this.email = userProfile.email;
+    this.avatarUrl = userProfile.avatarUrl;
+    this.bio = userProfile.bio;
+  }
 
 }

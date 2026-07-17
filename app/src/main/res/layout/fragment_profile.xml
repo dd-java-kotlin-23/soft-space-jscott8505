@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/profile"
+      android:textAppearance="?attr/textAppearanceHeadlineMedium"/>
+
+    <TextView
+      android:id="@+id/email"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp"
+      android:hint="@string/display_name">
+      <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/display_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="12dp"
+      android:hint="@string/avatar_url">
+      <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/avatar_url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textUri"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="12dp"
+      android:hint="@string/bio">
+      <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/bio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:minLines="3"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+      android:id="@+id/save_button"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp"
+      android:text="@string/save"/>
+
+    <com.google.android.material.button.MaterialButton
+      android:id="@+id/sign_out_button"
+      style="?attr/materialButtonOutlinedStyle"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="@string/sign_out"/>
+  </LinearLayout>
+</ScrollView>

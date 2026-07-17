@@ -26,6 +26,12 @@ plugins {
     alias(libs.plugins.junit)
 }
 
+// Firebase Console generates google-services.json for this application's package name. Keeping the
+// plugin conditional lets contributors build the UI before receiving that environment-specific file.
+if (file("google-services.json").exists()) {
+    apply(plugin = "com.google.gms.google-services")
+}
+
 android {
 
     namespace = project.property("basePackageName") as String
@@ -94,6 +100,11 @@ ksp {
 }
 
 dependencies {
+
+    // Firebase Authentication owns credentials; Firestore stores editable application profiles.
+    implementation(platform("com.google.firebase:firebase-bom:34.16.0"))
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-firestore")
 
     // .jar-based libraries included in project
 
