@@ -6,24 +6,24 @@ import androidx.room.PrimaryKey
 import java.util.Date
 
 @Entity(tableName = "events")
- class Event {
+data class Event (
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "event_id")
-    val id: Long = 0
+    val id: Long = 0,
 
     @ColumnInfo(index = true)
-    val title: String = ""
-    val description: String = ""
-    val location: String = ""
+    val title: String = "",
+    val description: String = "",
+    val location: String = "",
 
     @ColumnInfo(name = "start_time")
-    val startTime: Date = Date()
+    val startTime: Date = Date(),
 
     @ColumnInfo(name = "end_time")
-    val endTime: Date = Date()
+    val endTime: Date = Date(),
 
     @ColumnInfo(name = "is_sensory_friendly")
     val isSensoryFriendly: Boolean = true
 
-}
+)
