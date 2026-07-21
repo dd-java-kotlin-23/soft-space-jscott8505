@@ -41,14 +41,14 @@ public class UserProfileViewModel extends ViewModel {
     repository.loadOrCreate(user);
   }
 
-  public void save(String displayName, String avatarUrl, String bio) {
+  public void save(String displayName, String profilePicture, String bio) {
     UserProfile current = repository.getProfile().getValue();
     if (current == null) {
       message.setValue("Profile is not loaded yet.");
       return;
     }
     current.setDisplayName(displayName);
-    current.setAvatarUrl(avatarUrl);
+    current.setProfilePicture(profilePicture);
     current.setBio(bio);
     busy.setValue(true);
     repository.save(current).addOnCompleteListener(task -> {

@@ -60,14 +60,14 @@ public class ProfileFragment extends Fragment {
         binding.saveButton.setEnabled(!Boolean.TRUE.equals(busy)));
 
     binding.saveButton.setOnClickListener(unused -> profileViewModel.save(
-        text(binding.displayName), text(binding.avatarUrl), text(binding.bio)));
+        text(binding.displayName), text(binding.profilePicture), text(binding.bio)));
     binding.signOutButton.setOnClickListener(unused -> authViewModel.signOut());
   }
 
   private void showProfile(UserProfile profile) {
     if (profile != null) {
       binding.displayName.setText(profile.getDisplayName());
-      binding.avatarUrl.setText(profile.getAvatarUrl());
+      binding.profilePicture.setText(profile.getProfilePicture());
       binding.bio.setText(profile.getBio());
     }
   }

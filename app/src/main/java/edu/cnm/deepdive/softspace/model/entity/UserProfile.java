@@ -5,7 +5,7 @@ public class UserProfile {
   private String id;
   private String displayName;
   private String email;
-  private String avatarUrl;
+  private String profilePicture;
   private String bio;
 
   // Firestore needs a public no-argument constructor. In Kotlin, give every property in a data
@@ -13,11 +13,11 @@ public class UserProfile {
   public UserProfile() {
   }
 
-  public UserProfile(String id, String displayName, String email, String avatarUrl) {
+  public UserProfile(String id, String displayName, String email, String profilePicture) {
     this.id = id;
     this.displayName = displayName;
     this.email = email;
-    this.avatarUrl = avatarUrl;
+    this.profilePicture = profilePicture;
     this.bio = "";
   }
 
@@ -42,11 +42,11 @@ public class UserProfile {
     this.email = email;
   }
 
-  public String getAvatarUrl() {
-    return avatarUrl;
+  public String getProfilePicture() {
+    return profilePicture;
   }
-  public void setAvatarUrl(String avatarUrl) {
-    this.avatarUrl = avatarUrl;
+  public void setProfilePicture(String profilePicture) {
+    this.profilePicture = profilePicture;
   }
 
   public String getBio() {
@@ -58,7 +58,7 @@ public class UserProfile {
   public void updateUserProfile(UserProfile userProfile) {
     this.displayName = userProfile.displayName;
     this.email = userProfile.email;
-    this.avatarUrl = userProfile.avatarUrl;
+    this.profilePicture = userProfile.profilePicture;
     this.bio = userProfile.bio;
   }
 
