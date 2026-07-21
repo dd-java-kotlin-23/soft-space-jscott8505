@@ -23,4 +23,6 @@
   <string name="settings_label">Settings</string>
   <string name="calendar_label">Calendar</string>
   <string name="messages_label">Messages</string>
+  <string name="search_label">Search</string>
+  <string name="forgot_password">Forgot Password\n</string>
 </resources>

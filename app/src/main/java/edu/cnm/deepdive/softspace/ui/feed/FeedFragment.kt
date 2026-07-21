@@ -39,4 +39,5 @@ class FeedFragment : Fragment() {
         _binding = null
         super.onDestroyView()
     }
+
 }
