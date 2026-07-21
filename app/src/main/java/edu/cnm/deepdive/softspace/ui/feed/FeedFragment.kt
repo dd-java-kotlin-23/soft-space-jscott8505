@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import edu.cnm.deepdive.softspace.R
 import edu.cnm.deepdive.softspace.databinding.FragmentFeedBinding
 
 class FeedFragment : Fragment() {
@@ -29,8 +31,18 @@ class FeedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerFeed.adapter = postAdapter
-        binding.fabAddPost.setOnClickListener {
-            // TODO Navigate to the create-post screen.
+
+        binding.btnSettings.setOnClickListener {
+            // TODO Navigate to the settings screen when that destination is available.
+        }
+        binding.navChat.setOnClickListener {
+            binding.recyclerFeed.scrollToPosition(0)
+        }
+        binding.navCalendar.setOnClickListener {
+            // TODO Navigate to the calendar screen when that destination is available.
+        }
+        binding.navProfile.setOnClickListener {
+            findNavController().navigate(R.id.profileFragment)
         }
     }
 
