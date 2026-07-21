@@ -20,4 +20,6 @@
   <string name="author_profile_picture">Author profile picture</string>
   <string name="post_picture">Post picture</string>
   <string name="feed">Feed</string>
+  <string name="calendar_label">Calendar</string>
+  <string name="settings_label">Settings</string>
 </resources>
