@@ -25,15 +25,16 @@
         android:id="@+id/img_author_avatar"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@android:drawable/ic_menu_gallery" />
+        android:contentDescription="@string/author_profile_picture"
+        android:src="@android:drawable/ic_menu_gallery"/>
 
       <TextView
         android:id="@+id/text_author_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:textStyle="bold"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:textStyle="bold"/>
     </LinearLayout>
 
     <TextView
@@ -41,7 +42,14 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="10dp"
-      android:textSize="14sp" />
+      android:textSize="14sp"/>
+
+    <TextView
+      android:id="@+id/text_post_date"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="4dp"
+      android:textSize="12sp"/>
 
     <ImageView
       android:id="@+id/img_post_photo"
@@ -49,8 +57,9 @@
       android:layout_height="220dp"
       android:layout_marginTop="12dp"
       android:adjustViewBounds="true"
+      android:contentDescription="@string/post_picture"
       android:scaleType="centerCrop"
-      android:visibility="gone" />
+      android:visibility="gone"/>
 
     <LinearLayout
       android:id="@+id/layout_comments_action"
@@ -65,7 +74,8 @@
       <ImageView
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:src="@android:drawable/sym_action_chat" />
+        android:contentDescription="@null"
+        android:src="@android:drawable/sym_action_chat"/>
 
       <TextView
         android:id="@+id/text_comment_count"
@@ -74,7 +84,7 @@
         android:layout_marginStart="6dp"
         android:text="@string/comments_title"
         android:textColor="#666666"
-        android:textSize="13sp" />
+        android:textSize="13sp"/>
     </LinearLayout>
 
   </LinearLayout>

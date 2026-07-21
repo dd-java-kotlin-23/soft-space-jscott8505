@@ -17,4 +17,7 @@
   <string name="profile_picture">Profile picture</string>
   <string name="create_post_title">Create Post</string>
   <string name="comments_title">Comments</string>
+  <string name="author_profile_picture">Author profile picture</string>
+  <string name="post_picture">Post picture</string>
+  <string name="feed">Feed</string>
 </resources>
