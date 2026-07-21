@@ -14,4 +14,5 @@
   <string name="required_fields">Email and password are required.</string>
   <string name="add_photo_label">Add photo</string>
   <string name="upload_profile_picture">Upload Profile Picture</string>
+  <string name="profile_picture">Profile picture</string>
 </resources>

@@ -1,9 +1,13 @@
 package edu.cnm.deepdive.softspace.ui.profile;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -23,6 +27,9 @@ public class ProfileFragment extends Fragment {
   private FragmentProfileBinding binding;
   private UserProfileViewModel profileViewModel;
   private AuthViewModel authViewModel;
+  private String profilePicture;
+  private final ActivityResultLauncher<String[]> selectProfilePicture = registerForActivityResult(
+      new ActivityResultContracts.OpenDocument(), this::showSelectedProfilePicture);
 
   @Nullable
   @Override
@@ -59,16 +66,30 @@ public class ProfileFragment extends Fragment {
     profileViewModel.getBusy().observe(getViewLifecycleOwner(), busy ->
         binding.saveButton.setEnabled(!Boolean.TRUE.equals(busy)));
 
+    binding.layoutUploadPhoto.setOnClickListener(
+        unused -> selectProfilePicture.launch(new String[]{"image/*"}));
     binding.saveButton.setOnClickListener(unused -> profileViewModel.save(
-        text(binding.displayName), text(binding.profilePicture), text(binding.bio)));
+        text(binding.displayName), profilePicture, text(binding.bio)));
     binding.signOutButton.setOnClickListener(unused -> authViewModel.signOut());
   }
 
   private void showProfile(UserProfile profile) {
     if (profile != null) {
       binding.displayName.setText(profile.getDisplayName());
-      binding.profilePicture.setText(profile.getProfilePicture());
+      profilePicture = profile.getProfilePicture();
+      if (profilePicture != null && !profilePicture.isBlank()) {
+        binding.profilePicture.setImageURI(Uri.parse(profilePicture));
+      }
       binding.bio.setText(profile.getBio());
+    }
+  }
+
+  private void showSelectedProfilePicture(Uri uri) {
+    if (uri != null && binding != null) {
+      requireContext().getContentResolver().takePersistableUriPermission(uri,
+          Intent.FLAG_GRANT_READ_URI_PERMISSION);
+      profilePicture = uri.toString();
+      binding.profilePicture.setImageURI(uri);
     }
   }
 
