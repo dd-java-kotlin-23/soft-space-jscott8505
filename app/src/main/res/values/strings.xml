@@ -22,4 +22,5 @@
   <string name="feed">Feed</string>
   <string name="settings_label">Settings</string>
   <string name="calendar_label">Calendar</string>
+  <string name="messages_label">Messages</string>
 </resources>

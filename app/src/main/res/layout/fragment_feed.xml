@@ -65,28 +65,28 @@
       android:paddingHorizontal="20dp">
 
       <!-- Yellow Banner / Title Block 1 -->
-      <View
+      <TextView
         android:layout_width="match_parent"
         android:layout_height="36dp"
         android:layout_marginTop="12dp"
         android:background="#D0D0D0" />
 
       <!-- Subtitle/Paragraph Block 1 -->
-      <View
+      <TextView
         android:layout_width="180dp"
         android:layout_height="20dp"
         android:layout_marginTop="16dp"
         android:background="#D0D0D0" />
 
       <!-- Subtitle/Paragraph Block 2 -->
-      <View
+      <TextView
         android:layout_width="160dp"
         android:layout_height="32dp"
         android:layout_marginTop="16dp"
         android:background="#D0D0D0" />
 
       <!-- Yellow Banner / Title Block 2 -->
-      <View
+      <TextView
         android:layout_width="260dp"
         android:layout_height="36dp"
         android:layout_marginTop="16dp"
@@ -110,14 +110,14 @@
       </com.google.android.material.card.MaterialCardView>
 
       <!-- Yellow Text Highlight Block -->
-      <View
+      <TextView
         android:layout_width="280dp"
         android:layout_height="32dp"
         android:layout_marginTop="6dp"
         android:background="#D0D0D0" />
 
       <!-- Bottom Paragraph Block -->
-      <View
+      <TextView
         android:layout_width="140dp"
         android:layout_height="24dp"
         android:layout_marginTop="12dp"
@@ -145,7 +145,8 @@
       android:layout_width="0dp"
       android:layout_height="28dp"
       android:layout_weight="1"
-      android:src="@android:drawable/sym_action_chat" />
+      android:contentDescription="@string/messages_label"
+      android:src="@android:drawable/sym_action_chat"/>
 
     <!-- Calendar Tab -->
     <ImageView
@@ -154,7 +155,7 @@
       android:layout_height="28dp"
       android:layout_weight="1"
       android:contentDescription="@string/calendar_label"
-      android:src="@drawable/outline_calendar_month_24" />
+      android:src="@drawable/outline_calendar_month_24"/>
 
 
     <!-- Profile Tab -->
@@ -163,7 +164,7 @@
       android:layout_width="0dp"
       android:layout_height="32dp"
       android:layout_weight="1"
-      android:src="@drawable/outline_account_circle_24" />
+      android:src="@drawable/outline_account_circle_24"/>
 
   </LinearLayout>
 
