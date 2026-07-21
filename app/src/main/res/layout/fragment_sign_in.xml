@@ -13,8 +13,17 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="center_horizontal"
+      android:text="@string/app_name"
+      android:textAppearance="?attr/textAppearanceDisplaySmall"
+      android:textStyle="bold"/>
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginTop="8dp"
       android:text="@string/sign_in"
-      android:textAppearance="?attr/textAppearanceHeadlineMedium"/>
+      android:textAppearance="?attr/textAppearanceHeadlineSmall"/>
 
     <com.google.android.material.textfield.TextInputLayout
       android:layout_width="match_parent"
