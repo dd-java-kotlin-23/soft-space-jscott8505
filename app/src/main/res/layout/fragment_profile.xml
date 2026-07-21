@@ -36,18 +36,6 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="12dp"
-      android:hint="@string/avatar_url">
-      <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/avatar_url"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textUri"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="12dp"
       android:hint="@string/bio">
       <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/bio"
@@ -57,6 +45,28 @@
         android:inputType="textMultiLine"
         android:minLines="3"/>
     </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+      android:id="@+id/layout_upload_photo"
+      android:layout_width="120dp"
+      android:layout_height="120dp"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginTop="16dp"
+      android:layout_marginBottom="8dp"
+      android:background="@drawable/outline_add_photo_alternate_24"
+      android:clickable="true"
+      android:focusable="true"
+      android:gravity="center"
+      android:orientation="vertical"
+      android:padding="12dp"/>
+
+    <TextView
+      android:id="@+id/text_upload_photo"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="6dp"
+      android:gravity="center"
+      android:text="@string/upload_profile_picture"/>
 
     <com.google.android.material.button.MaterialButton
       android:id="@+id/save_button"
