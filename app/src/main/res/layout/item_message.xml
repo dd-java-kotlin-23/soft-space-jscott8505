@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_marginHorizontal="8dp"
+  android:layout_marginVertical="4dp"
+  app:cardCornerRadius="8dp"
+  app:cardElevation="2dp">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
+
+      <!-- Sender / Recipient Name -->
+      <TextView
+        android:id="@+id/text_message_sender"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="User Name"
+        android:textStyle="bold"
+        android:textSize="16sp" />
+
+      <!-- Timestamp -->
+      <TextView
+        android:id="@+id/text_message_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12:00 PM"
+        android:textColor="#757575"
+        android:textSize="12sp" />
+    </LinearLayout>
+
+    <!-- Message Body -->
+    <TextView
+      android:id="@+id/text_message_body"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="4dp"
+      android:text="Message preview text goes here..."
+      android:textColor="#424242"
+      android:textSize="14sp" />
+
+  </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

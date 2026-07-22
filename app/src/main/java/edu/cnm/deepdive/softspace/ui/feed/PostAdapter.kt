@@ -39,7 +39,6 @@ class PostAdapter(
 
         fun bind(post: Post, onCommentsClick: (Post) -> Unit) {
             binding.textAuthorName.text = post.authorName
-            binding.textPostContent.text = post.content
             binding.textPostDate.text = DateFormat.getDateTimeInstance().format(post.createdDate)
             binding.textCommentCount.text = post.commentCount.toString()
 

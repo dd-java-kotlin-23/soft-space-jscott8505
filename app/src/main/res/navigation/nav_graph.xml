@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/nav_graph"
   app:startDestination="@id/signInFragment">
 
@@ -13,6 +14,9 @@
       app:destination="@id/profileFragment"
       app:popUpTo="@id/signInFragment"
       app:popUpToInclusive="true"/>
+    <action
+      android:id="@+id/action_signInFragment_to_feedFragment"
+      app:destination="@id/feedFragment"/>
   </fragment>
 
   <fragment
@@ -29,5 +33,20 @@
   <fragment
     android:id="@+id/feedFragment"
     android:name="edu.cnm.deepdive.softspace.ui.feed.FeedFragment"
-    android:label="@string/feed"/>
+    android:label="@string/feed">
+    <action
+      android:id="@+id/action_feedFragment_to_navigation_messages"
+      app:destination="@id/navigation_messages"/>
+  </fragment>
+
+  <fragment
+    android:id="@+id/navigation_messages"
+    android:name="edu.cnm.deepdive.softspace.ui.feed.MessagesFragment"
+    android:label="Messages"
+    tools:layout="@layout/fragment_messages" >
+    <action
+      android:id="@+id/action_navigation_messages_to_feedFragment"
+      app:destination="@id/feedFragment"/>
+  </fragment>
+
 </navigation>

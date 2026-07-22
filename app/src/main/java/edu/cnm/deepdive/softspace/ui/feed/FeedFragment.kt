@@ -30,13 +30,13 @@ class FeedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.recyclerFeed.adapter = postAdapter
+        binding.postsRecyclerView.adapter = postAdapter
 
         binding.btnSettings.setOnClickListener {
             // TODO Navigate to the settings screen when that destination is available.
         }
         binding.navChat.setOnClickListener {
-            binding.recyclerFeed.scrollToPosition(0)
+            binding.postsRecyclerView.scrollToPosition(0)
         }
         binding.navCalendar.setOnClickListener {
             // TODO Navigate to the calendar screen when that destination is available.
@@ -47,7 +47,7 @@ class FeedFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        binding.recyclerFeed.adapter = null
+        binding.postsRecyclerView.adapter = null
         _binding = null
         super.onDestroyView()
     }
