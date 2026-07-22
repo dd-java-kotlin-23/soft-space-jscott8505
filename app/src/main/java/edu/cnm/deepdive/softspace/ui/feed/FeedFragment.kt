@@ -36,7 +36,7 @@ class FeedFragment : Fragment() {
             // TODO Navigate to the settings screen when that destination is available.
         }
         binding.navChat.setOnClickListener {
-            binding.postsRecyclerView.scrollToPosition(0)
+            findNavController().navigate(R.id.action_feedFragment_to_navigation_messages)
         }
         binding.navCalendar.setOnClickListener {
             // TODO Navigate to the calendar screen when that destination is available.
