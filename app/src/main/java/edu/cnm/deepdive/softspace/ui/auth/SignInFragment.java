@@ -33,7 +33,7 @@ public class SignInFragment extends Fragment {
     AuthViewModel viewModel = new ViewModelProvider(this).get(AuthViewModel.class);
     viewModel.getUser().observe(getViewLifecycleOwner(), user -> {
       if (user != null) {
-        Navigation.findNavController(view).navigate(R.id.action_signInFragment_to_profileFragment);
+        Navigation.findNavController(view).navigate(R.id.action_signInFragment_to_feedFragment);
       }
     });
     viewModel.getBusy().observe(getViewLifecycleOwner(), busy -> setEnabled(!Boolean.TRUE.equals(busy)));

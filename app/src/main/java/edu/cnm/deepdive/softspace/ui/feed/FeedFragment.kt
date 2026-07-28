@@ -36,13 +36,13 @@ class FeedFragment : Fragment() {
             // TODO Navigate to the settings screen when that destination is available.
         }
         binding.navChat.setOnClickListener {
-            findNavController().navigate(R.id.action_feedFragment_to_navigation_messages)
+            findNavController().navigate(R.id.action_feedFragment_to_messagesFragment)
         }
         binding.navCalendar.setOnClickListener {
-            // TODO Navigate to the calendar screen when that destination is available.
+            findNavController().navigate(R.id.action_feedFragment_to_calendarFragment)
         }
         binding.navProfile.setOnClickListener {
-            findNavController().navigate(R.id.profileFragment)
+            findNavController().navigate(R.id.action_feedFragment_to_profileFragment)
         }
     }
 
