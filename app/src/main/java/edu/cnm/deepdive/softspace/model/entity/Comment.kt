@@ -1,23 +1,21 @@
 package edu.cnm.deepdive.softspace.model.entity
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.Index
-import androidx.room.PrimaryKey
-import java.util.Date
+import androidx.room.*
+import java.util.*
 
 @Entity(
    tableName = "comment",
    foreignKeys = [ForeignKey(
       entity = Post::class,
-      parentColumns = ["id"],
-      childColumns = ["postId"],
+      parentColumns = ["post_id"],
+      childColumns = ["post_Id"],
       onDelete = ForeignKey.CASCADE
    )],
-   indices = [Index(value = ["postId"])]
+   indices = [Index(value = ["postId"])
+   ,Index(value = ["user_profile_id"])]
 )
  class Comment {
+
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "comment_id")
