@@ -11,18 +11,19 @@
     android:layout_height="wrap_content">
 
     <!-- 1. FULL-WIDTH BACKGROUND BANNER PHOTO -->
+
+    <!-- Vertical Guideline separating Left (35%) and Right (65%) columns -->
     <ImageView
       android:id="@+id/img_banner"
       android:layout_width="0dp"
       android:layout_height="160dp"
+      android:layout_marginTop="4dp"
       android:scaleType="centerCrop"
       android:src="@drawable/outline_add_photo_alternate_24"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="1.0"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      tools:src="@tools:sample/backgrounds/scenic" />
-
-    <!-- Vertical Guideline separating Left (35%) and Right (65%) columns -->
+      app:layout_constraintTop_toTopOf="parent"/>
     <androidx.constraintlayout.widget.Guideline
       android:id="@+id/guideline_column"
       android:layout_width="wrap_content"
@@ -44,40 +45,45 @@
 
       <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="479dp"
+        android:padding="16dp"
         android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
 
         <com.google.android.material.imageview.ShapeableImageView
           android:id="@+id/img_profile"
-          android:layout_width="80dp"
-          android:layout_height="80dp"
-          app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
-          tools:src="@tools:sample/avatars" />
-
+          android:layout_width="100dp"
+          android:layout_height="100dp"
+          android:scaleType="centerCrop"
+          android:src="@drawable/outline_account_circle_24"/>
         <TextView
           android:id="@+id/tv_name"
+          android:textStyle="bold"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="8dp"
-          android:textStyle="bold"
-          tools:text="Name" />
-
+          tools:text="Name"/>
         <TextView
           android:id="@+id/tv_email"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          tools:text="Email" />
-
+          tools:text="Email"/>
         <TextView
           android:id="@+id/tv_location"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          tools:text="From: United States" />
+          tools:text="From: United States"/>
+
+        <TextView
+          android:id="@+id/bio"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          tools:text="Bio"/>
       </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
 
     <!-- 3. RIGHT POSTS COLUMN (Anchored below banner) -->
     <com.google.android.material.card.MaterialCardView
