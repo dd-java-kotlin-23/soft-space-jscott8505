@@ -12,7 +12,9 @@
   <CalendarView
     android:id="@+id/calendar_view"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
+    android:paddingTop="16dp"/>
 
   <TextView
     android:id="@+id/text_events_header"
