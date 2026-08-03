@@ -15,7 +15,6 @@ import edu.cnm.deepdive.softspace.databinding.ProfilePageBinding
 import edu.cnm.deepdive.softspace.model.entity.UserProfile
 import edu.cnm.deepdive.softspace.viewmodel.UserProfileViewModel
 
-/** Displays a profile selected by its stable Firebase user ID. */
 @AndroidEntryPoint
 class ProfilePage : Fragment() {
 
