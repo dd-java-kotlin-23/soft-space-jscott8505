@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import edu.cnm.deepdive.softspace.R
 import edu.cnm.deepdive.softspace.model.entity.Message
@@ -25,7 +26,11 @@ class MessagesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_messages)
-        adapter = MessageAdapter()
+        adapter = MessageAdapter { message ->
+            val direction = MessagesFragmentDirections
+                .actionMessagesFragmentToConversationFragment(message.id)
+            findNavController().navigate(direction)
+        }
         recyclerView.adapter = adapter
 
         // Sample Data for testing UI

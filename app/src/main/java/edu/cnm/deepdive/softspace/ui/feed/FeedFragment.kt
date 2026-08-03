@@ -16,7 +16,9 @@ class FeedFragment : Fragment() {
         get() = checkNotNull(_binding)
 
     private val postAdapter = PostAdapter { post ->
-        // TODO Navigate to the comments screen with post.id.
+        val direction = FeedFragmentDirections
+            .actionFeedFragmentToPostDetailFragment(post.id)
+        findNavController().navigate(direction)
     }
 
     override fun onCreateView(

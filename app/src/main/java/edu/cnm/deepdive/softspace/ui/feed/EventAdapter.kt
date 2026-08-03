@@ -10,7 +10,8 @@ import edu.cnm.deepdive.softspace.R
 import edu.cnm.deepdive.softspace.model.entity.Event
 
 class EventAdapter(
-    private var events: List<Event> = emptyList()
+    private var events: List<Event> = emptyList(),
+    private val onEventClick: (Event) -> Unit
 ) : RecyclerView.Adapter<EventAdapter.Holder>() {
 
     fun setEvents(events: List<Event>) {
@@ -25,7 +26,7 @@ class EventAdapter(
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.bind(events[position])
+        holder.bind(events[position], onEventClick)
     }
 
     override fun getItemCount(): Int = events.size
@@ -36,10 +37,11 @@ class EventAdapter(
         private val descriptionText: TextView = itemView.findViewById(R.id.text_event_description)
 
         @SuppressLint("SetTextI18n")
-        fun bind(event: Event) {
+        fun bind(event: Event, onEventClick: (Event) -> Unit) {
             titleText.text = event.title
             locationText.text = "📍 ${event.location}"
             descriptionText.text = event.description
+            itemView.setOnClickListener { onEventClick(event) }
         }
     }
 }

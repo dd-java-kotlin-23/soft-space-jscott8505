@@ -49,6 +49,16 @@ public class UserProfileRepository {
     }).addOnFailureListener(error::setValue);
   }
 
+  public void load(String userId) {
+    if (firestore == null) {
+      error.setValue(configurationException());
+      return;
+    }
+    document(userId).get()
+        .addOnSuccessListener(snapshot -> profile.setValue(snapshot.toObject(UserProfile.class)))
+        .addOnFailureListener(error::setValue);
+  }
+
   public Task<Void> createFor(AuthenticatedUser user) {
     UserProfile initial = new UserProfile(
         user.getId(), user.getDisplayName(), user.getEmail(), user.getAvatarUrl());

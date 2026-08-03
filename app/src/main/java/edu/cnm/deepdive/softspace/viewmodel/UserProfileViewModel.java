@@ -41,6 +41,10 @@ public class UserProfileViewModel extends ViewModel {
     repository.loadOrCreate(user);
   }
 
+  public void load(String userId) {
+    repository.load(userId);
+  }
+
   public void save(String displayName, String profilePicture, String bio) {
     UserProfile current = repository.getProfile().getValue();
     if (current == null) {
