@@ -55,6 +55,20 @@
       app:destination="@id/signInFragment"
       app:popUpTo="@id/nav_graph"
       app:popUpToInclusive="true"/>
+
+    <fragment
+      android:id="@+id/navigation_profile"
+      android:name="edu.cnm.deepdive.softspace.ui.profile.ProfilePage"
+      android:label="Profile"
+      tools:layout="@layout/profile_page">
+    <action
+      android:id="@+id/action_global_to_profile"
+      app:destination="@id/navigation_profile"
+      app:popUpTo="@id/nav_graph"
+      app:popUpToInclusive="true"/>
+
+    </fragment>
+
   </fragment>
 
 </navigation>
