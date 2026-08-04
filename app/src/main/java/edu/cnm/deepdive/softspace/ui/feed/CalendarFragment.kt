@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.softspace.ui.feed
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +29,7 @@ class CalendarFragment : Fragment() {
         val calendarView = view.findViewById<CalendarView>(R.id.calendar_view)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_events)
 
-        adapter = EventAdapter()
+        adapter = EventAdapter{ Log.d(tag, "$it")}
         recyclerView.adapter = adapter
 
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
@@ -55,3 +56,5 @@ class CalendarFragment : Fragment() {
         adapter.setEvents(dummyEvents)
     }
 }
+
+ private val tag = CalendarFragment::class.java.simpleName

@@ -42,16 +42,19 @@ public class ProfileFragment extends Fragment {
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     profileViewModel = new ViewModelProvider(this).get(UserProfileViewModel.class);
+    /*
     authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
 
     authViewModel.getUser().observe(getViewLifecycleOwner(), user -> {
       if (user == null) {
-        Navigation.findNavController(view).navigate(R.id.action_profileFragment_to_signInFragment);
+        Navigation.findNavController(view)
+            .navigate(ProfileFragmentDirections.actionProfileFragmentToSignInFragment());
       } else {
         binding.email.setText(user.getEmail());
         profileViewModel.load(user);
       }
     });
+    */
     profileViewModel.getUserProfile().observe(getViewLifecycleOwner(), this::showProfile);
     profileViewModel.getError().observe(getViewLifecycleOwner(), error -> {
       if (error != null) {

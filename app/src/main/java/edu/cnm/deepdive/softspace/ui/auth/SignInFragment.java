@@ -33,10 +33,13 @@ public class SignInFragment extends Fragment {
     AuthViewModel viewModel = new ViewModelProvider(this).get(AuthViewModel.class);
     viewModel.getUser().observe(getViewLifecycleOwner(), user -> {
       if (user != null) {
-        Navigation.findNavController(view).navigate(R.id.action_signInFragment_to_feedFragment);
+        Navigation.findNavController(view)
+            .navigate(SignInFragmentDirections.actionSignInFragmentToMainActivity());
+       requireActivity().finish();
       }
     });
-    viewModel.getBusy().observe(getViewLifecycleOwner(), busy -> setEnabled(!Boolean.TRUE.equals(busy)));
+    viewModel.getBusy()
+        .observe(getViewLifecycleOwner(), busy -> setEnabled(!Boolean.TRUE.equals(busy)));
     viewModel.getMessage().observe(getViewLifecycleOwner(), message -> {
       if (message != null) {
         Snackbar.make(view, message, Snackbar.LENGTH_LONG).show();
@@ -85,6 +88,7 @@ public class SignInFragment extends Fragment {
   }
 
   private static class Credentials {
+
     final String email;
     final String password;
 

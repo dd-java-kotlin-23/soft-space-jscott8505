@@ -2,38 +2,21 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
-  android:id="@+id/nav_graph"
-  app:startDestination="@id/signInFragment">
+  android:id="@+id/main_nav_graph"
+  app:startDestination="@id/profilePageFragment"> <!-- TODO Make feed fragment the start destination -->
 
-  <fragment
-    android:id="@+id/signInFragment"
-    android:name="edu.cnm.deepdive.softspace.ui.auth.SignInFragment"
-    android:label="@string/sign_in"
-    tools:layout="@layout/fragment_sign_in">
-    <action
-      android:id="@+id/action_signInFragment_to_feedFragment"
-      app:destination="@id/feedFragment"
-      app:popUpTo="@id/signInFragment"
-      app:popUpToInclusive="true"/>
-  </fragment>
+  <action
+    android:id="@+id/return_to_login"
+    app:destination="@id/login_activity"/>
 
+  <action
+    android:id="@+id/open_settings"
+    app:destination="@+id/settings_fragment"/>
   <fragment
     android:id="@+id/feedFragment"
     android:name="edu.cnm.deepdive.softspace.ui.feed.FeedFragment"
     android:label="@string/feed"
     tools:layout="@layout/fragment_feed">
-    <action
-      android:id="@+id/action_feedFragment_to_messagesFragment"
-      app:destination="@id/messagesFragment"/>
-    <action
-      android:id="@+id/action_feedFragment_to_calendarFragment"
-      app:destination="@id/calendarFragment"/>
-    <action
-      android:id="@+id/action_feedFragment_to_profileFragment"
-      app:destination="@id/profileFragment"/>
-    <action
-      android:id="@+id/action_feedFragment_to_postDetailFragment"
-      app:destination="@id/postDetailFragment"/>
   </fragment>
 
   <fragment
@@ -43,7 +26,12 @@
     tools:layout="@layout/fragment_messages">
     <action
       android:id="@+id/action_messagesFragment_to_conversationFragment"
-      app:destination="@id/conversationFragment"/>
+      app:destination="@id/conversationFragment">
+      <argument
+        android:name="messageId"
+        app:argType="long"
+        android:defaultValue="0L"/>
+    </action>
   </fragment>
 
   <fragment
@@ -61,14 +49,9 @@
     android:name="edu.cnm.deepdive.softspace.ui.profile.ProfileFragment"
     android:label="@string/profile"
     tools:layout="@layout/fragment_profile">
-    <action
-      android:id="@+id/action_profileFragment_to_signInFragment"
-      app:destination="@id/signInFragment"
-      app:popUpTo="@id/nav_graph"
-      app:popUpToInclusive="true"/>
-    <action
-      android:id="@+id/action_profileFragment_to_profilePageFragment"
-      app:destination="@id/profilePageFragment"/>
+    <argument
+      android:name="userId"
+      app:argType="string"/>
   </fragment>
 
   <fragment
@@ -78,10 +61,16 @@
     tools:layout="@layout/profile_page">
     <argument
       android:name="userId"
-      app:argType="string"/>
+      app:argType="string"
+      android:defaultValue=""/>
     <action
-      android:id="@+id/action_profilePageFragment_to_feedFragment"
-      app:destination="@id/feedFragment"/>
+      android:id="@+id/edit_profile"
+      app:destination="@id/profileFragment">
+    <argument
+      android:name="userId"
+      app:argType="string"/>
+
+    </action>
   </fragment>
 
   <fragment
@@ -111,7 +100,17 @@
     tools:layout="@layout/fragment_conversation">
     <argument
       android:name="messageId"
-      app:argType="long"/>
+      app:argType="long"
+      android:defaultValue="0L"/>
   </fragment>
+
+  <fragment
+    android:id="@+id/settings_fragment"
+    android:name="edu.cnm.deepdive.softspace.ui.feed.SettingsFragment"
+    android:label="Settings"/>
+
+  <activity
+    android:id="@+id/login_activity"
+    android:name="edu.cnm.deepdive.softspace.ui.LoginActivity"/>
 
 </navigation>

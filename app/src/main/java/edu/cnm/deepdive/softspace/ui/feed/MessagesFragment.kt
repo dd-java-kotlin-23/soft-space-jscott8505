@@ -28,7 +28,7 @@ class MessagesFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_messages)
         adapter = MessageAdapter { message ->
             val direction = MessagesFragmentDirections
-                .actionMessagesFragmentToConversationFragment(message.id)
+                .actionMessagesFragmentToConversationFragment().setMessageId(message.id)
             findNavController().navigate(direction)
         }
         recyclerView.adapter = adapter

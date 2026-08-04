@@ -35,15 +35,6 @@ class FeedFragment : Fragment() {
         binding.btnSettings.setOnClickListener {
             // TODO Navigate to the settings screen when that destination is available.
         }
-        binding.navChat.setOnClickListener {
-            findNavController().navigate(R.id.action_feedFragment_to_messagesFragment)
-        }
-        binding.navCalendar.setOnClickListener {
-            findNavController().navigate(R.id.action_feedFragment_to_calendarFragment)
-        }
-        binding.navProfile.setOnClickListener {
-            findNavController().navigate(R.id.action_feedFragment_to_profileFragment)
-        }
     }
 
     override fun onDestroyView() {
