@@ -1,10 +1,10 @@
 package edu.cnm.deepdive.softspace.repository;
 
-import android.app.Application;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import com.google.firebase.FirebaseApp;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import edu.cnm.deepdive.softspace.model.entity.Post;
 import jakarta.inject.Inject;
@@ -18,8 +18,8 @@ public class PostRepository {
   private final CollectionReference postCollection;
 
   @Inject
-  PostRepository(Application application) {
-    firestore = FirebaseApp.getApps(application).isEmpty() ? null : FirebaseFirestore.getInstance();
+  PostRepository() {
+    firestore = FirebaseFirestore.getInstance();
     postCollection = firestore.collection("posts");
   }
 
@@ -31,6 +31,10 @@ public class PostRepository {
       liveData.postValue(result.toObjects(Post.class));
     });
     return liveData;
+  }
+
+  public Task<DocumentReference> create(Post post) {
+    return postCollection.add(post);
   }
 
 }
