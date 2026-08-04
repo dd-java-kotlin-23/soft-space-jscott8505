@@ -26,10 +26,10 @@ class CalendarFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val calendarView = view.findViewById<CalendarView>(R.id.calendar_view)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_events)
+        // val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_events)
 
-        adapter = EventAdapter()
-        recyclerView.adapter = adapter
+        // adapter = EventAdapter()
+        // recyclerView.adapter = adapter
 
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             loadEventsForDate(year, month, dayOfMonth)

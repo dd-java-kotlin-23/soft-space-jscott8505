@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import edu.cnm.deepdive.softspace.R
 import edu.cnm.deepdive.softspace.databinding.FragmentFeedBinding
+import edu.cnm.deepdive.softspace.viewmodel.FeedViewModel
 
 class FeedFragment : Fragment() {
 
@@ -31,6 +33,11 @@ class FeedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.postsRecyclerView.adapter = postAdapter
+
+        val viewModel = ViewModelProvider(this).get(FeedViewModel::class.java)
+        viewModel.allPosts().observe(viewLifecycleOwner) { posts ->
+            postAdapter.submitList(posts)
+        }
 
         binding.btnSettings.setOnClickListener {
             // TODO Navigate to the settings screen when that destination is available.
