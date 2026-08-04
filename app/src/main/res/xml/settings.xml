@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="Display">
+      <SwitchPreferenceCompat
+        app:key="dark_mode"
+        app:title="Dark Mode"
+        app:defaultValue="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Notifications">
+
+      <SwitchPreferenceCompat
+        app:key="event_reminders"
+        app:title="Sensory Event Reminders"
+        app:summary="Get notified about upcoming sensory-friendly events"
+        app:defaultValue="true" />
+
+      <SwitchPreferenceCompat
+        app:key="message_notifications"
+        app:title="Direct Message Alerts"
+        app:summary="Receive alerts when someone sends you a message"
+        app:defaultValue="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Account">
+
+      <Preference
+        app:key="edit_profile"
+        app:title="Edit Profile Information"
+        app:summary="Update display name, email, and bio" />
+
+      <Preference
+        app:key="sign_out"
+        app:title="Sign Out"
+        app:summary="Log out of your SoftSpace account" />
+
+    </PreferenceCategory>
+
+</androidx.preference.PreferenceScreen>
