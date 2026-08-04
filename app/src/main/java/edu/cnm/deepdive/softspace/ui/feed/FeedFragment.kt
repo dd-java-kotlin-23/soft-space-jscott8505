@@ -9,11 +9,15 @@ import androidx.navigation.fragment.findNavController
 import edu.cnm.deepdive.softspace.R
 import edu.cnm.deepdive.softspace.databinding.FragmentFeedBinding
 
-class FeedFragment(actionFeedFragmentToPostDetailFragment: Unit.(Long) -> Unit) : Fragment() {
+class FeedFragment : Fragment() {
 
     private var _binding: FragmentFeedBinding? = null
     private val binding: FragmentFeedBinding
         get() = checkNotNull(_binding)
+
+    private val postAdapter = PostAdapter { post ->
+        // TODO Navigate to the comments screen with post.id.
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,10 +30,10 @@ class FeedFragment(actionFeedFragmentToPostDetailFragment: Unit.(Long) -> Unit) 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.postsRecyclerView.adapter
+        binding.postsRecyclerView.adapter = postAdapter
 
         binding.btnSettings.setOnClickListener {
-            findNavController().navigate(R.id.action_feedFragment_to_settingsFragment)
+            // TODO Navigate to the settings screen when that destination is available.
         }
         binding.navChat.setOnClickListener {
             findNavController().navigate(R.id.action_feedFragment_to_messagesFragment)

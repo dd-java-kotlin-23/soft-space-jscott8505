@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import edu.cnm.deepdive.softspace.R
 import edu.cnm.deepdive.softspace.model.entity.Event
@@ -29,11 +28,7 @@ class CalendarFragment : Fragment() {
         val calendarView = view.findViewById<CalendarView>(R.id.calendar_view)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_events)
 
-        adapter = EventAdapter { event ->
-            val direction = CalendarFragmentDirections
-                .actionCalendarFragmentToEventDetailFragment(event.id)
-            findNavController().navigate(direction)
-        }
+        adapter = EventAdapter()
         recyclerView.adapter = adapter
 
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
