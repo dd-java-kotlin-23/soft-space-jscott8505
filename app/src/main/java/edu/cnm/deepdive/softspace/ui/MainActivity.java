@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     if (item.getItemId() == R.id.settings) {
       navController.navigate(MainNavGraphDirections.openSettings());
     }else if(item.getItemId() == R.id.sign_out) {
-      // TODO: 8/4/26 invoke sign out method in auth viewmodel. 
+      // TODO: 8/4/26 invoke sign out method in auth viewmodel.
     }else {
     handled = super.onOptionsItemSelected(item);
     }

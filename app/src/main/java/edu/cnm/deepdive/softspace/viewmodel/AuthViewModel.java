@@ -77,6 +77,13 @@ public class AuthViewModel extends ViewModel {
   public void signOut() {
     profileRepository.clear();
     authService.signOut();
+            try {
+      profileRepository.clear();
+      authService.signOut();
+    } catch (Exception e) {
+      message.postValue(e.getMessage());
+    }
+
   }
 
   private void run(Task<AuthenticatedUser> task, String successMessage) {
