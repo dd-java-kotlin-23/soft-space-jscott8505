@@ -6,8 +6,10 @@
     <PreferenceCategory app:title="Display">
       <SwitchPreferenceCompat
         app:key="dark_mode"
-        app:title="Dark Mode"
-        app:defaultValue="false" />
+        app:title="Theme"
+        app:defaultValue="true"
+        android:summaryOn="Dark Mode"
+        android:summaryOff="Light Mode"/>
 
     </PreferenceCategory>
 
@@ -17,13 +19,17 @@
         app:key="event_reminders"
         app:title="Sensory Event Reminders"
         app:summary="Get notified about upcoming sensory-friendly events"
-        app:defaultValue="true" />
+        app:defaultValue="true"
+        android:summaryOn="On"
+        android:summaryOff="Off"/>
 
       <SwitchPreferenceCompat
         app:key="message_notifications"
         app:title="Direct Message Alerts"
         app:summary="Receive alerts when someone sends you a message"
-        app:defaultValue="true" />
+        app:defaultValue="true"
+        android:summaryOn="Yes Notify"
+        android:summaryOff="Silent"/>
 
     </PreferenceCategory>
 
@@ -37,7 +43,7 @@
       <Preference
         app:key="sign_out"
         app:title="Sign Out"
-        app:summary="Log out of your SoftSpace account" />
+        app:summary="Log out of your SoftSpace account"/>
 
     </PreferenceCategory>
 

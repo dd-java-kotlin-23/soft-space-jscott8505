@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import edu.cnm.deepdive.softspace.R
@@ -16,8 +18,12 @@ class FeedFragment : Fragment() {
         get() = checkNotNull(_binding)
 
     private val postAdapter = PostAdapter { post ->
-        // TODO Navigate to the comments screen with post.id.
+        val bundle = Bundle().apply {
+            putLong("postId", post.id)
+        }
+        findNavController().navigate(R.id.action_feedFragment_to_postDetailFragment, bundle)
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,11 +37,8 @@ class FeedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.postsRecyclerView.adapter = postAdapter
-
-        binding.btnSettings.setOnClickListener {
-            // TODO Navigate to the settings screen when that destination is available.
-        }
     }
+
 
     override fun onDestroyView() {
         binding.postsRecyclerView.adapter = null

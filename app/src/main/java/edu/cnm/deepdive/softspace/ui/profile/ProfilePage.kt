@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import edu.cnm.deepdive.softspace.R
 import edu.cnm.deepdive.softspace.databinding.ProfilePageBinding
 import edu.cnm.deepdive.softspace.model.entity.UserProfile
+import edu.cnm.deepdive.softspace.ui.feed.PostAdapter
 import edu.cnm.deepdive.softspace.viewmodel.UserProfileViewModel
 
 @AndroidEntryPoint
@@ -53,7 +55,8 @@ class ProfilePage : Fragment() {
         binding.tvName.text = profile.displayName
         binding.tvEmail.text = profile.email
         binding.bio.text = profile.bio
-        binding.tvPostsTitle.text = getString(R.string.posts_by_format, profile.displayName.orEmpty())
+        binding.tvPostsTitle.text =
+            getString(R.string.posts_by_format, profile.displayName.orEmpty())
         profile.profilePicture
             ?.takeIf(String::isNotBlank)
             ?.let(Uri::parse)
@@ -64,4 +67,5 @@ class ProfilePage : Fragment() {
         _binding = null
         super.onDestroyView()
     }
+
 }

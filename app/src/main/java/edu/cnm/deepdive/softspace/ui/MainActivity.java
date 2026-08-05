@@ -10,10 +10,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsCompat.Type;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.AppBarConfiguration.Builder;
 import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 import dagger.hilt.android.AndroidEntryPoint;
@@ -56,9 +58,10 @@ public class MainActivity extends AppCompatActivity {
     if (item.getItemId() == R.id.settings) {
       navController.navigate(MainNavGraphDirections.openSettings());
     }else if(item.getItemId() == R.id.sign_out) {
-      // TODO: 8/4/26 invoke sign-out method in auth viewmodel.
-    }else {
-    handled = super.onOptionsItemSelected(item);
+      AuthViewModel authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
+      authViewModel.signOut();
+    } else {
+      handled = super.onOptionsItemSelected(item);
     }
     return handled;
   }
@@ -67,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     EdgeToEdge.enable(this);
     binding = ActivityMainBinding.inflate(getLayoutInflater());
     ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
-      Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+      Insets systemBars = insets.getInsets(Type.systemBars());
       v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
       return insets;
     });
@@ -75,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void setUpNavigation() {
-    appBarConfig = new AppBarConfiguration.Builder(R.id.feedFragment, R.id.messagesFragment,
+    appBarConfig = new Builder(R.id.feedFragment, R.id.messagesFragment,
         R.id.calendarFragment, R.id.profilePageFragment).build();
     NavHostFragment host = binding.navHost.getFragment();
     navController = host.getNavController();
