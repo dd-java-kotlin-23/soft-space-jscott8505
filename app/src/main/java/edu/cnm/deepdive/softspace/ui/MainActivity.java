@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.softspace.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -19,6 +21,7 @@ import edu.cnm.deepdive.softspace.MainNavGraphDirections;
 import edu.cnm.deepdive.softspace.R;
 import edu.cnm.deepdive.softspace.databinding.ActivityLoginBinding;
 import edu.cnm.deepdive.softspace.databinding.ActivityMainBinding;
+import edu.cnm.deepdive.softspace.viewmodel.AuthViewModel;
 
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setUpLayout();
     setUpNavigation();
+    setupViewModels();
   }
 
   @Override
@@ -52,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     if (item.getItemId() == R.id.settings) {
       navController.navigate(MainNavGraphDirections.openSettings());
     }else if(item.getItemId() == R.id.sign_out) {
-      // TODO: 8/4/26 invoke sign out method in auth viewmodel.
+      // TODO: 8/4/26 invoke sign-out method in auth viewmodel.
     }else {
     handled = super.onOptionsItemSelected(item);
     }
@@ -80,7 +84,15 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void setupViewModels() {
-    // TODO: 8/4/26 Connect to auth viewmodel and navigate to login activity, if theres no logged in user. 
+    AuthViewModel authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
+    authViewModel.getUser().observe(this, (user) -> {
+      if (user == null) {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+      }
+    });
   }
   
 }
