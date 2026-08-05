@@ -44,7 +44,7 @@ class ProfilePage : Fragment() {
                 Snackbar.make(view, message, Snackbar.LENGTH_LONG).show()
             }
         }
-//        viewModel.load(args.userId)
+//      viewModel.load(args.userId)
         // FIXME: fix this so we can load the profile.
     }
 

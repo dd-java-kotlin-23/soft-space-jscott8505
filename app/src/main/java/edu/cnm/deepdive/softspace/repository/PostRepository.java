@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.softspace.repository;
 
+import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.google.android.gms.tasks.Task;
@@ -34,6 +35,7 @@ public class PostRepository {
   }
 
   public Task<DocumentReference> create(Post post) {
+    Log.i("Post", "create: "+post.toString());
     return postCollection.add(post);
   }
 
