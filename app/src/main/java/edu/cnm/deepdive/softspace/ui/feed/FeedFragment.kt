@@ -11,11 +11,13 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import edu.cnm.deepdive.softspace.R
 import edu.cnm.deepdive.softspace.databinding.FragmentFeedBinding
 import edu.cnm.deepdive.softspace.model.entity.Post
 import edu.cnm.deepdive.softspace.viewmodel.FeedViewModel
+import edu.cnm.deepdive.softspace.viewmodel.AuthViewModel
 import kotlin.getValue
 
 @AndroidEntryPoint
@@ -25,6 +27,7 @@ class FeedFragment : Fragment() {
     private val binding: FragmentFeedBinding
         get() = checkNotNull(_binding)
     private val viewModel: FeedViewModel by viewModels()
+    private val authViewModel: AuthViewModel by viewModels()
 
     private val postAdapter = PostAdapter { post ->
         val bundle = Bundle().apply {
@@ -53,7 +56,14 @@ class FeedFragment : Fragment() {
 
         binding.buttonPost.setOnClickListener {
             Log.i("FF", "onViewCreated: ")
+            val user = authViewModel.user.value
+            if (user == null) {
+                Snackbar.make(view, "Sign in before creating a post.", Snackbar.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
             val post = Post(
+                authorId = user.id,
+                authorName = user.displayName.orEmpty(),
                 content = binding.postContentInput.text.toString()
             )
             viewModel.create(post).addOnSuccessListener {

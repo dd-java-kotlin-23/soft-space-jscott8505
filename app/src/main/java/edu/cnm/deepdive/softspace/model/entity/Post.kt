@@ -22,8 +22,8 @@ data class Post(
     @ColumnInfo(name = "post_id")
     val id: Long = 0,
 
-    @ColumnInfo(name = "user_profile_id")
-    val userProfileId: Long = 0,
+    @ColumnInfo(name = "author_id")
+    val authorId: String = "",
 
     @ColumnInfo(name = "author_name")
     val authorName: String = "",

@@ -1,7 +1,5 @@
 package edu.cnm.deepdive.softspace.viewmodel;
 
-import static kotlinx.coroutines.flow.FlowKt.subscribe;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -9,6 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 import edu.cnm.deepdive.softspace.model.AuthenticatedUser;
 import edu.cnm.deepdive.softspace.model.entity.Post;
 import edu.cnm.deepdive.softspace.model.entity.UserProfile;
+import edu.cnm.deepdive.softspace.repository.PostRepository;
 import edu.cnm.deepdive.softspace.repository.UserProfileRepository;
 import jakarta.inject.Inject;
 import java.util.List;
@@ -17,13 +16,14 @@ import java.util.List;
 public class UserProfileViewModel extends ViewModel {
 
   private final UserProfileRepository repository;
+  private final PostRepository postRepository;
   private final MutableLiveData<Boolean> busy = new MutableLiveData<>(false);
   private final MutableLiveData<String> message = new MutableLiveData<>();
-  private final MutableLiveData<List<Post>> posts = new MutableLiveData<>();
 
   @Inject
-  public UserProfileViewModel(UserProfileRepository repository) {
+  public UserProfileViewModel(UserProfileRepository repository, PostRepository postRepository) {
     this.repository = repository;
+    this.postRepository = postRepository;
   }
 
   public LiveData<UserProfile> getUserProfile() {
@@ -42,8 +42,8 @@ public class UserProfileViewModel extends ViewModel {
     return message;
   }
 
-  public LiveData<List<Post>> getPosts() {
-    return posts;
+  public LiveData<List<Post>> postsByAuthor(String authorId) {
+    return postRepository.postsByAuthor(authorId);
   }
 
   public void load(AuthenticatedUser user) {
@@ -52,7 +52,6 @@ public class UserProfileViewModel extends ViewModel {
 
   public void load(String userId) {
     repository.load(userId);
-    getPosts().observeForever(posts::setValue);
   }
 
 
