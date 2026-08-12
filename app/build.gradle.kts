@@ -142,6 +142,7 @@ dependencies {
 
     // Room ORM library & annotation processor
     implementation(libs.room.runtime)
+    implementation(libs.filament.android)
     ksp(libs.room.compiler)
 
     // Hilt dependency-injection library & annotation processor
