@@ -19,6 +19,11 @@
     android:name="edu.cnm.deepdive.softspace.ui.feed.FeedFragment"
     android:label="@string/feed"
     tools:layout="@layout/fragment_feed">
+
+    <action
+      android:id="@+id/action_feedFragment_to_postDetailFragment"
+      app:destination="@id/postDetailFragment" />
+
   </fragment>
 
   <fragment
@@ -114,17 +119,5 @@
   <activity
     android:id="@+id/login_activity"
     android:name="edu.cnm.deepdive.softspace.ui.LoginActivity"/>
-
-  <fragment
-    android:id="@+id/feedFragment"
-    android:name="edu.cnm.deepdive.softspace.ui.feed.FeedFragment"
-    android:label="Feed"
-    tools:layout="@layout/fragment_feed">
-
-    <action
-      android:id="@+id/action_feedFragment_to_postDetailFragment"
-      app:destination="@id/postDetailFragment" />
-
-  </fragment>
 
 </navigation>
