@@ -40,6 +40,7 @@ class PostAdapter(
         fun bind(post: Post, onCommentsClick: (Post) -> Unit) {
             binding.textAuthorName.text = post.authorName
             binding.textPostDate.text = DateFormat.getDateTimeInstance().format(post.createdDate)
+            binding.textPostContent.text = post.content
             binding.textCommentCount.text = post.commentCount.toString()
 
             val imageUrl = post.imageUrl

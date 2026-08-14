@@ -1,132 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:fillViewport="true">
+  android:layout_height="match_parent">
 
-  <androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+  <ImageView
+    android:id="@+id/img_banner"
+    android:layout_width="0dp"
+    android:layout_height="160dp"
+    android:scaleType="centerCrop"
+    android:src="@drawable/outline_add_photo_alternate_24"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- 1. FULL-WIDTH BACKGROUND BANNER PHOTO -->
+  <com.google.android.material.card.MaterialCardView
+    android:id="@+id/card_profile"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/img_banner">
 
-    <!-- Vertical Guideline separating Left (35%) and Right (65%) columns -->
-    <ImageView
-      android:id="@+id/img_banner"
-      android:layout_width="0dp"
-      android:layout_height="160dp"
-      android:layout_marginTop="4dp"
-      android:scaleType="centerCrop"
-      android:src="@drawable/outline_add_photo_alternate_24"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="1.0"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"/>
-    <androidx.constraintlayout.widget.Guideline
-      android:id="@+id/guideline_column"
-      android:layout_width="wrap_content"
+    <LinearLayout
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:orientation="vertical"
-      app:layout_constraintGuide_percent="0.35" />
+      android:gravity="center_vertical"
+      android:orientation="horizontal"
+      android:padding="16dp">
 
-    <!-- 2. LEFT PROFILE COLUMN (Anchored below banner) -->
-    <com.google.android.material.card.MaterialCardView
-      android:id="@+id/card_profile"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_margin="16dp"
-      app:cardCornerRadius="8dp"
-      app:cardElevation="2dp"
-      app:layout_constraintEnd_toStartOf="@id/guideline_column"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/img_banner">
+      <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/img_profile"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/outline_account_circle_24" />
 
       <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="479dp"
-        android:padding="16dp"
-        android:gravity="center_horizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_weight="1"
         android:orientation="vertical">
 
-        <com.google.android.material.imageview.ShapeableImageView
-          android:id="@+id/img_profile"
-          android:layout_width="100dp"
-          android:layout_height="100dp"
-          android:scaleType="centerCrop"
-          android:src="@drawable/outline_account_circle_24"/>
         <TextView
           android:id="@+id/tv_name"
-          android:textStyle="bold"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginTop="8dp"
-          tools:text="Name"/>
+          android:textStyle="bold"
+          tools:text="Name" />
+
         <TextView
           android:id="@+id/tv_email"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          tools:text="Email"/>
+          tools:text="Email" />
+
         <TextView
           android:id="@+id/tv_location"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          tools:text="From: United States"/>
+          tools:text="From: United States" />
 
         <TextView
           android:id="@+id/bio"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="8dp"
-          tools:text="Bio"/>
+          tools:text="Bio" />
       </LinearLayout>
+    </LinearLayout>
+  </com.google.android.material.card.MaterialCardView>
 
-    </com.google.android.material.card.MaterialCardView>
+  <TextView
+    android:id="@+id/tv_posts_title"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:text="Posts by..."
+    android:textStyle="bold"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/card_profile" />
 
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/rv_user_posts"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_marginTop="8dp"
+    android:clipToPadding="false"
+    android:paddingBottom="8dp"
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tv_posts_title"
+    tools:listitem="@layout/item_post" />
 
-    <!-- 3. RIGHT POSTS COLUMN (Anchored below banner) -->
-    <com.google.android.material.card.MaterialCardView
-      android:id="@+id/card_posts"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_margin="16dp"
-      app:cardCornerRadius="8dp"
-      app:cardElevation="2dp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toEndOf="@id/guideline_column"
-      app:layout_constraintTop_toBottomOf="@id/img_banner">
-
-      <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-        <TextView
-          android:id="@+id/tv_posts_title"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="Posts by..."
-          android:textStyle="bold" />
-
-      </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/rv_user_posts"
-      android:layout_width="254dp"
-      android:layout_height="476dp"
-      android:layout_marginTop="8dp"
-      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="1.0"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/card_posts"
-      app:layout_constraintVertical_bias="0.0"
-      tools:listitem="@layout/item_post"/>
-
-  </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
