@@ -25,6 +25,10 @@ data class Post(
     @ColumnInfo(name = "user_profile_id")
     val userProfileId: Long = 0,
 
+    /** Firebase Authentication UID of the post author. */
+    @ColumnInfo(name = "author_id")
+    val authorId: String = "",
+
     @ColumnInfo(name = "author_name")
     val authorName: String = "",
     val content: String = "",

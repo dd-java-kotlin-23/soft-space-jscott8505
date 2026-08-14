@@ -25,6 +25,12 @@ class ProfilePage : Fragment() {
     private var _binding: ProfilePageBinding? = null
     private val binding: ProfilePageBinding
         get() = checkNotNull(_binding)
+    private val postAdapter = PostAdapter { post ->
+        findNavController().navigate(
+            R.id.postDetailFragment,
+            Bundle().apply { putLong("postId", post.id) }
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,15 +43,22 @@ class ProfilePage : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.rvUserPosts.adapter = postAdapter
         viewModel.getUserProfile().observe(viewLifecycleOwner, ::showProfile)
+        viewModel.getPosts().observe(viewLifecycleOwner) { posts ->
+            postAdapter.submitList(posts ?: emptyList())
+        }
         viewModel.getError().observe(viewLifecycleOwner) { error ->
             if (error != null) {
                 val message = error.localizedMessage ?: getString(R.string.profile_load_failed)
                 Snackbar.make(view, message, Snackbar.LENGTH_LONG).show()
             }
         }
-//      viewModel.load(args.userId)
-        // FIXME: fix this so we can load the profile.
+        if (args.userId.isBlank()) {
+            viewModel.loadCurrentUser()
+        } else {
+            viewModel.load(args.userId)
+        }
     }
 
     private fun showProfile(profile: UserProfile?) {
@@ -64,6 +77,7 @@ class ProfilePage : Fragment() {
     }
 
     override fun onDestroyView() {
+        binding.rvUserPosts.adapter = null
         _binding = null
         super.onDestroyView()
     }

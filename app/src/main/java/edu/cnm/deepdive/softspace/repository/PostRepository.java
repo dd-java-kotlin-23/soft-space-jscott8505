@@ -9,10 +9,13 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import edu.cnm.deepdive.softspace.model.AuthenticatedUser;
 import edu.cnm.deepdive.softspace.model.entity.Post;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Singleton
 public class PostRepository {
@@ -39,24 +42,36 @@ public class PostRepository {
   }
 
   public LiveData<List<Post>> allPosts() {
-    MutableLiveData<List<Post>> userPosts = new MutableLiveData<>();
-    Object userId = null;
-    postCollection
-        .whereEqualTo("userId", null)
-        .addSnapshotListener((result, error) -> {
-          if (error == null && result != null) {
-            userPosts.setValue(result.toObjects(Post.class));
-          } else if (error != null) {
-            this.error.setValue(error);
-          }
-        });
-
-    return userPosts;
+    return posts;
   }
 
-  public Task<DocumentReference> create(Post post) {
+  /** Returns a live list of posts written by one Firebase-authenticated user. */
+  public LiveData<List<Post>> postsByAuthor(String authorId) {
+    MutableLiveData<List<Post>> authorPosts = new MutableLiveData<>();
+    postCollection
+        .whereEqualTo("authorId", authorId)
+        .addSnapshotListener((result, error) -> {
+          if (error == null && result != null) {
+            authorPosts.setValue(result.toObjects(Post.class));
+          } else if (error != null) {
+            this.error.postValue(error);
+          }
+        });
+    return authorPosts;
+  }
+
+  /** Creates a post with the currently authenticated user's immutable author identity. */
+  public Task<DocumentReference> create(Post post, AuthenticatedUser author) {
     Log.i("Post", "create: "+post.toString());
-    return postCollection.add(post);
+    Map<String, Object> document = new HashMap<>();
+    document.put("userProfileId", post.getUserProfileId());
+    document.put("authorId", author.getId());
+    document.put("authorName", author.getDisplayName() == null ? "" : author.getDisplayName());
+    document.put("content", post.getContent());
+    document.put("imageUrl", post.getImageUrl());
+    document.put("commentCount", post.getCommentCount());
+    document.put("createdDate", post.getCreatedDate());
+    return postCollection.add(document);
   }
 
 }
