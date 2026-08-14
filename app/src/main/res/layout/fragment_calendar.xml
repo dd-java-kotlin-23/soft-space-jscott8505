@@ -32,6 +32,11 @@
   android:orientation="vertical"
   android:padding="12dp">
 
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recycler_events"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+
   <TextView
     android:id="@+id/text_event_title"
     android:layout_width="match_parent"
@@ -58,8 +63,4 @@
     android:textSize="13sp" />
 
 </LinearLayout>
-  <androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/recycler_events"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
 </LinearLayout>

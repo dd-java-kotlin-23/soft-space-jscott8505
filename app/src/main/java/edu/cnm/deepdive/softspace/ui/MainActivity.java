@@ -1,12 +1,14 @@
 package edu.cnm.deepdive.softspace.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -17,6 +19,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.AppBarConfiguration.Builder;
 import androidx.navigation.ui.NavigationUI;
+import androidx.preference.PreferenceManager;
 import com.google.android.material.navigation.NavigationView;
 import dagger.hilt.android.AndroidEntryPoint;
 import edu.cnm.deepdive.softspace.MainNavGraphDirections;
@@ -34,6 +37,13 @@ public class MainActivity extends AppCompatActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
+    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+    boolean isDarkMode = prefs.getBoolean("key_dark_mode", false);
+    if (isDarkMode) {
+      AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+    } else {
+      AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+    }
     super.onCreate(savedInstanceState);
     setUpLayout();
     setUpNavigation();
