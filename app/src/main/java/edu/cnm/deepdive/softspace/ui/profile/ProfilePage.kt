@@ -44,11 +44,11 @@ class ProfilePage : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.rvUserPosts.adapter = postAdapter
-        viewModel.getUserProfile().observe(viewLifecycleOwner, ::showProfile)
-        viewModel.getPosts().observe(viewLifecycleOwner) { posts ->
+        viewModel.userProfile.observe(viewLifecycleOwner, ::showProfile)
+        viewModel.posts.observe(viewLifecycleOwner) { posts ->
             postAdapter.submitList(posts ?: emptyList())
         }
-        viewModel.getError().observe(viewLifecycleOwner) { error ->
+        viewModel.error.observe(viewLifecycleOwner) { error ->
             if (error != null) {
                 val message = error.localizedMessage ?: getString(R.string.profile_load_failed)
                 Snackbar.make(view, message, Snackbar.LENGTH_LONG).show()
