@@ -25,5 +25,6 @@ data class Event (
 
     @ColumnInfo(name = "is_sensory_friendly")
     val isSensoryFriendly: Boolean = true
-
-)
+){
+    constructor(): this(0, "", "", "", Date(), Date(), true)
+}

@@ -72,6 +72,7 @@ public class UserProfileViewModel extends ViewModel {
           : task.getException() != null ? task.getException().getLocalizedMessage()
               : "Unable to save profile.");
     });
+
   }
 
   // Kotlin migration: use viewModelScope and a repository StateFlow. A data-class copy call such as
