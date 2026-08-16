@@ -32,11 +32,6 @@
   android:orientation="vertical"
   android:padding="12dp">
 
-  <androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/recycler_events"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
-
   <TextView
     android:id="@+id/text_event_title"
     android:layout_width="match_parent"
@@ -50,7 +45,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="4dp"
-    android:text="📍 Main Community Center"
+    android:text="📍 Museum"
     android:textColor="#666666"
     android:textSize="14sp" />
 
@@ -61,6 +56,39 @@
     android:layout_marginTop="6dp"
     android:text="Dimmed lighting, quiet spaces, and reduced noise levels available."
     android:textSize="13sp" />
+
+  <com.google.android.material.chip.ChipGroup
+    android:id="@+id/chip_group_sensory"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:chipSpacingHorizontal="8dp"
+    app:singleSelection="false">
+
+    <com.google.android.material.chip.Chip
+      android:id="@+id/chip_lighting"
+      style="@style/Widget.MaterialComponents.Chip.Action"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="💡 Dimmed Lighting" />
+
+    <com.google.android.material.chip.Chip
+      android:id="@+id/chip_quiet_space"
+      style="@style/Widget.MaterialComponents.Chip.Action"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="🔇 Quiet Space" />
+
+  </com.google.android.material.chip.ChipGroup>
+
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recycler_events"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:clipToPadding="false"
+    android:paddingBottom="16dp"
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    tools:listitem="@layout/item_event" />
 
 </LinearLayout>
 </LinearLayout>

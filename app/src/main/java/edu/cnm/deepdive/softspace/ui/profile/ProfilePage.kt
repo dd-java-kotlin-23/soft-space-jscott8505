@@ -54,11 +54,44 @@ class ProfilePage : Fragment() {
                 Snackbar.make(view, message, Snackbar.LENGTH_LONG).show()
             }
         }
-        if (args.userId.isBlank()) {
+        val targetUserId = arguments?.getString("userId")
+
+        if (targetUserId.isNullOrBlank()) {
             viewModel.loadCurrentUser()
         } else {
-            viewModel.load(args.userId)
+            viewModel.load(targetUserId)
+            binding.rvUserPosts.adapter = postAdapter
+            viewModel.posts.observe(viewLifecycleOwner) { posts ->
+                postAdapter.submitList(posts ?: emptyList())
+
+                // 1. ALWAYS attach adapter first
+                binding.rvUserPosts.adapter = postAdapter
+
+                // 2. Observe profile details
+                viewModel.userProfile.observe(viewLifecycleOwner, ::showProfile)
+
+                // 3. Observe posts list ONCE
+                viewModel.posts.observe(viewLifecycleOwner) { posts ->
+                    postAdapter.submitList(posts ?: emptyList())
+                }
+
+                viewModel.error.observe(viewLifecycleOwner) { error ->
+                    if (error != null) {
+                        val message = error.localizedMessage ?: "Unable to load profile."
+                        Snackbar.make(view, message, Snackbar.LENGTH_LONG).show()
+                    }
+                }
+
+                // 4. Trigger the user load
+                val targetUserId = arguments?.getString("userId")
+                if (targetUserId.isNullOrBlank()) {
+                    viewModel.loadCurrentUser()
+                } else {
+                    viewModel.load(targetUserId)
+                }
+            }
         }
+
     }
 
     private fun showProfile(profile: UserProfile?) {
@@ -72,8 +105,27 @@ class ProfilePage : Fragment() {
             getString(R.string.posts_by_format, profile.displayName.orEmpty())
         profile.profilePicture
             ?.takeIf(String::isNotBlank)
-            ?.let(Uri::parse)
-            ?.let(binding.imgProfile::setImageURI)
+            ?.let { uriString ->
+                try {
+                    binding.imgProfile.setImageURI(Uri.parse(uriString))
+                } catch (e: SecurityException) {
+                    // Fallback to default avatar if permission is denied
+                    binding.imgProfile.setImageResource(R.drawable.cover)
+                } catch (e: Exception) {
+                    // Catch any other unexpected image loading errors safely
+                    binding.imgProfile.setImageResource(R.drawable.autism)
+
+                    binding.tvName.text = profile.displayName
+                    binding.tvEmail.text = profile.email
+
+                    // Bind bio (with fallback if empty)
+                    binding.bio.text = profile.bio.ifEmpty { "No bio available." }
+
+                    binding.tvPostsTitle.text = "Posts by ${profile.displayName.orEmpty()}"
+
+                    // ... profile image logic ...
+                }
+            }
     }
 
     override fun onDestroyView() {

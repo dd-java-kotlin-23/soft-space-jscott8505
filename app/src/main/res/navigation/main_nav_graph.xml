@@ -17,9 +17,10 @@
   <fragment
     android:id="@+id/feedFragment"
     android:name="edu.cnm.deepdive.softspace.ui.feed.FeedFragment"
-    android:label="@string/feed"
+    android:label="Feed"
     tools:layout="@layout/fragment_feed">
 
+    <!-- ADD THIS ACTION BLOCK HERE -->
     <action
       android:id="@+id/action_feedFragment_to_postDetailFragment"
       app:destination="@id/postDetailFragment" />
@@ -53,12 +54,13 @@
 
   <fragment
     android:id="@+id/profileFragment"
-    android:name="edu.cnm.deepdive.softspace.ui.profile.ProfileFragment"
-    android:label="@string/profile"
-    tools:layout="@layout/fragment_profile">
+    android:name="edu.cnm.deepdive.softspace.ui.profile.ProfilePage"
+    android:label="Profile"
+    tools:layout="@layout/profile_page">
     <argument
       android:name="userId"
-      app:argType="string"/>
+      app:argType="string"
+      android:defaultValue="" />
   </fragment>
 
   <fragment

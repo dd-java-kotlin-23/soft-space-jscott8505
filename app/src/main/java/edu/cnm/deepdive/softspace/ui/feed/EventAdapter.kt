@@ -36,6 +36,7 @@ class EventAdapter(
         private val locationText: TextView = itemView.findViewById(R.id.text_event_location)
         private val descriptionText: TextView = itemView.findViewById(R.id.text_event_description)
 
+
         @SuppressLint("SetTextI18n")
         fun bind(event: Event, onEventClick: (Event) -> Unit) {
             titleText.text = event.title
@@ -44,4 +45,5 @@ class EventAdapter(
             itemView.setOnClickListener { onEventClick(event) }
         }
     }
+
 }
