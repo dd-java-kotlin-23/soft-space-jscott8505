@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import edu.cnm.deepdive.softspace.R
 import edu.cnm.deepdive.softspace.model.entity.Event
@@ -14,6 +15,7 @@ import edu.cnm.deepdive.softspace.model.entity.Event
 class CalendarFragment : Fragment() {
 
     private lateinit var adapter: EventAdapter
+    private lateinit var viewModel: CalendarViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,19 +31,18 @@ class CalendarFragment : Fragment() {
         val calendarView = view.findViewById<CalendarView>(R.id.calendar_view)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_events)
 
-        adapter = EventAdapter{ Log.d(tag, "$it")}
+        adapter = EventAdapter { Log.d(tag, "$it") }
         recyclerView.adapter = adapter
 
-        calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
-            loadEventsForDate(year, month, dayOfMonth)
-        }
+        // Setup ViewModel
+        viewModel = ViewModelProvider(this)[CalendarViewModel::class.java]
 
-        loadEventsForDate(2026, 6, 22)
-    }
-
-    private fun loadEventsForDate(year: Int, month: Int, day: Int) {
-        // Sample events (replace with ViewModel / Room DB fetch later)
-        val dummyEvents = listOf(
+        val localPlaceholders = listOf(
+            Event(
+                title = "Walmart Daily Sensory Hours",
+                location = "All Albuquerque Locations",
+                description = "Everyday 8:00 AM – 10:00 AM: Dimmed overhead lights, muted radio, and static TV screens."
+            ),
             Event(
                 title = "Sensory Storytime",
                 location = "Public Library - Room B",
@@ -53,8 +54,37 @@ class CalendarFragment : Fragment() {
                 description = "Audio exhibits turned down and crowd limits enforced."
             )
         )
-        adapter.setEvents(dummyEvents)
+
+        // Observe events from Firebase & merge with local placeholders
+        viewModel.events.observe(viewLifecycleOwner) { firebaseEvents ->
+            val combinedList = mutableListOf<Event>()
+
+            // Add local placeholders first
+            combinedList.addAll(localPlaceholders)
+
+            // Add Firebase events if present
+            if (!firebaseEvents.isNullOrEmpty()) {
+                combinedList.addAll(firebaseEvents)
+            }
+
+            // Update adapter
+            adapter.setEvents(combinedList)
+        }
+
+        calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
+            loadEventsForDate(year, month, dayOfMonth)
+        }
+
+        // Default load for August 22, 2026
+        loadEventsForDate(year = 2026, month = 7, day = 22)
     }
+
+    private fun loadEventsForDate(year: Int, month: Int, day: Int) {
+                    viewModel.fetchEventsForDate(year, month, day)
+                    }
 }
 
- private val tag = CalendarFragment::class.java.simpleName
+    private val tag = CalendarFragment::class.java.simpleName
+
+
+
