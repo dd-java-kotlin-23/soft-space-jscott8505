@@ -98,6 +98,23 @@
       android:text="Sign Out"
       app:icon="@android:drawable/ic_lock_power_off" />
 
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="8dp"
+      android:text="About"
+      android:textColor="?attr/colorPrimary"
+      android:textSize="14sp"
+      android:textStyle="bold" />
+
+    <TextView
+      android:id="@+id/text_app_version"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingVertical="8dp"
+      android:text="App By Jazzmine Scott"
+      android:textColor="?android:attr/textColorSecondary"
+      android:textSize="14sp" />
   </LinearLayout>
 
 </ScrollView>
