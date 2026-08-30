@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.activity.result.contract.ActivityResultContracts.OpenDocument;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -16,6 +17,7 @@ import androidx.navigation.Navigation;
 import com.google.android.material.snackbar.Snackbar;
 import dagger.hilt.android.AndroidEntryPoint;
 import edu.cnm.deepdive.softspace.R;
+import edu.cnm.deepdive.softspace.databinding.FragmentFeedBinding;
 import edu.cnm.deepdive.softspace.databinding.FragmentProfileBinding;
 import edu.cnm.deepdive.softspace.model.entity.UserProfile;
 import edu.cnm.deepdive.softspace.viewmodel.AuthViewModel;
@@ -28,6 +30,8 @@ public class ProfileFragment extends Fragment {
   private UserProfileViewModel profileViewModel;
   private AuthViewModel authViewModel;
   private String profilePicture;
+
+
   private final ActivityResultLauncher<String[]> selectProfilePicture = registerForActivityResult(
       new ActivityResultContracts.OpenDocument(), this::showSelectedProfilePicture);
 
@@ -42,19 +46,6 @@ public class ProfileFragment extends Fragment {
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     profileViewModel = new ViewModelProvider(this).get(UserProfileViewModel.class);
-    /*
-    authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
-
-    authViewModel.getUser().observe(getViewLifecycleOwner(), user -> {
-      if (user == null) {
-        Navigation.findNavController(view)
-            .navigate(ProfileFragmentDirections.actionProfileFragmentToSignInFragment());
-      } else {
-        binding.email.setText(user.getEmail());
-        profileViewModel.load(user);
-      }
-    });
-    */
     profileViewModel.getUserProfile().observe(getViewLifecycleOwner(), this::showProfile);
     profileViewModel.getError().observe(getViewLifecycleOwner(), error -> {
       if (error != null) {
