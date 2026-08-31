@@ -1,13 +1,13 @@
 package edu.cnm.deepdive.softspace.ui.feed
 
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.PickVisualMediaRequest
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.contract.ActivityResultContracts.TakePicturePreview
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -16,7 +16,7 @@ import edu.cnm.deepdive.softspace.R
 import edu.cnm.deepdive.softspace.databinding.FragmentFeedBinding
 import edu.cnm.deepdive.softspace.model.entity.Post
 import edu.cnm.deepdive.softspace.viewmodel.FeedViewModel
-import kotlin.getValue
+
 
 @AndroidEntryPoint
 class FeedFragment : Fragment() {
@@ -62,6 +62,9 @@ class FeedFragment : Fragment() {
                 Log.i("FF", "onViewCreated: ${it.localizedMessage}")
             }
         }
+
+        binding.buttonAddImage.setOnClickListener({ v -> takePictureLauncher.launch(null) }
+        )
     }
 
 
@@ -71,5 +74,17 @@ class FeedFragment : Fragment() {
         super.onDestroyView()
         Log.i("FF", "onDestroyView: ")
     }
+
+    private var capturedImageBitmap: Bitmap? = null
+
+    private val takePictureLauncher = registerForActivityResult<Void?, Bitmap?>(
+        TakePicturePreview(), ActivityResultCallback { bitmap: Bitmap? ->
+            if (bitmap != null) {
+                capturedImageBitmap = bitmap
+                binding.imagePreview.setImageBitmap(bitmap)
+                binding.imagePreview.setVisibility(View.VISIBLE)
+            }
+        }
+    )
 
 }

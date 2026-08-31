@@ -16,6 +16,15 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <ImageButton
+      android:id="@+id/button_delete_post"
+      android:layout_width="32dp"
+      android:layout_height="32dp"
+      android:background="?attr/selectableItemBackgroundBorderless"
+      android:contentDescription="Delete Post"
+      android:src="@drawable/outline_more_horiz_24"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent"/>
     <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -62,6 +71,7 @@
       android:contentDescription="@string/post_picture"
       android:scaleType="centerCrop"
       android:visibility="gone"/>
+
 
     <LinearLayout
       android:id="@+id/layout_comments_action"
