@@ -6,6 +6,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentReference;
 import dagger.hilt.android.lifecycle.HiltViewModel;
+import edu.cnm.deepdive.softspace.model.AuthenticatedUser;
+import edu.cnm.deepdive.softspace.model.entity.Comment;
 import edu.cnm.deepdive.softspace.model.entity.Post;
 import edu.cnm.deepdive.softspace.repository.PostRepository;
 import edu.cnm.deepdive.softspace.service.AuthService;
@@ -33,6 +35,13 @@ public class FeedViewModel extends ViewModel {
     return author == null
         ? Tasks.forException(new IllegalStateException("Sign in before creating a post."))
         : postRepository.create(post, author);
+  }
+
+  public Task<DocumentReference> comment(Comment comment) {
+    var author = authService.getUser().getValue();
+    return author == null
+        ? Tasks.forException(new IllegalArgumentException("Sign in before creating a comment."))
+        : postRepository.createComment(comment, author);
   }
 
 }

@@ -10,6 +10,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import edu.cnm.deepdive.softspace.model.AuthenticatedUser;
+import edu.cnm.deepdive.softspace.model.entity.Comment;
 import edu.cnm.deepdive.softspace.model.entity.Post;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
@@ -24,11 +25,13 @@ public class PostRepository {
   private final CollectionReference postCollection;
   private final MutableLiveData<List<Post>> posts;
   private final MutableLiveData<FirebaseFirestoreException> error;
+  private final CollectionReference commentCollection;
 
   @Inject
   PostRepository() {
     firestore = FirebaseFirestore.getInstance();
     postCollection = firestore.collection("posts");
+    commentCollection = firestore.collection("comments");
     posts = new MutableLiveData<>();
     error = new MutableLiveData<>();
     postCollection.addSnapshotListener((QuerySnapshot result, FirebaseFirestoreException error) -> {
@@ -72,6 +75,14 @@ public class PostRepository {
     document.put("commentCount", post.getCommentCount());
     document.put("createdDate", post.getCreatedDate());
     return postCollection.add(document);
+  }
+
+  public Task<DocumentReference> createComment(Comment comment, AuthenticatedUser author) {
+    Map<String, Object> document = new HashMap<>();
+    document.put("userProfileId", comment.getUserProfileId());
+    document.put("postId", comment.getPostId());
+    document.put("text", comment.getText());
+    return commentCollection.add(document);
   }
 
 }

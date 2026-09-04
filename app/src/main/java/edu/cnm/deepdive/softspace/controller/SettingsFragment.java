@@ -1,5 +1,7 @@
 package edu.cnm.deepdive.softspace.controller;
 
+import android.app.UiModeManager;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -43,9 +45,11 @@ public class SettingsFragment extends Fragment {
     binding.switchDarkMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
       preferences.edit().putBoolean(KEY_DARK_MODE, isChecked).apply();
       if (isChecked) {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        UiModeManager uiManager = (UiModeManager) getActivity().getSystemService(Context.UI_MODE_SERVICE);
+        uiManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_YES);
       } else {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        UiModeManager uiManager = (UiModeManager) getActivity().getSystemService(Context.UI_MODE_SERVICE);
+        uiManager.setApplicationNightMode(UiModeManager.MODE_NIGHT_NO);
       }
     });
     // --- 2. SENSORY EVENT REMINDERS SWITCH ---

@@ -34,4 +34,5 @@
   <string name="details_data_note">Details will be loaded by this screen’s repository and view model.</string>
   <string name="posts_by_format">Posts by %1$s</string>
   <string name="profile_load_failed">Unable to load profile.</string>
+  <string name="submit">Submit</string>
 </resources>

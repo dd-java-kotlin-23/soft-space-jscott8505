@@ -122,4 +122,7 @@
     android:id="@+id/login_activity"
     android:name="edu.cnm.deepdive.softspace.ui.LoginActivity"/>
 
+  <fragment
+    android:id="@id/edit_profile"
+    android:name="edu.cnm.deepdive.softspace.ui.profile.EditProfileFragment"/>
 </navigation>
